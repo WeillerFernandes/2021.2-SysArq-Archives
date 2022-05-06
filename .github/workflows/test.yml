@@ -25,24 +25,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
-     # - name: Install tox and any other packages
-     #   run: pip install tox
-     # - name: Run tox
-     #   run: tox -- --cov=archives_app --cov-report=xml --junitxml=junittest.xml
-
-      - name: Criar arquivo .env
-        run: |
-          touch .env
-          echo SECRET_KEY=secret_key >> .env
-          echo DEBUG=True >> .env
-          echo POSTGRES_HOST=db_archives >> .env
-          echo POSTGRES_DB=postgres >> .env
-          echo POSTGRES_USER=postgres >> .env
-          echo POSTGRES_PASSWORD=password >> .env
-          cat .env
-
-      - name: Executar pytest  
-        run: sudo docker-compose run web_archives pytest --cov --cov-report xml:./coverage.xml
+          cache: pip
+      - name: Install tox and any other packages
+        run: pip install tox
+      - name: Run tox
+        run: tox -- --cov=archives_app --cov-report=xml --junitxml=junittest.xml
 
       - name: fix code coverage paths
         if: always()
