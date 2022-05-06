@@ -28,7 +28,12 @@ jobs:
       - name: Install tox and any other packages
         run: pip install tox
       - name: Run tox
-        run: tox -e py
+        run: tox -- --cov=src --cov-report=xml --junitxml=junittest.xml
+
+      - name: fix code coverage paths
+        if: always()
+        run: |
+          sed -i 's/\/home\/runner\/work\/2021.2-SysArq-Archives\/2021.2-SysArq-Archives\//\/github\/workspace\//g' coverage.xml
 
       - name: Criar arquivo .env
         run: |
