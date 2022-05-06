@@ -20,7 +20,7 @@ METRICS_SONAR = [
     'security_rating'
 ]
 
-BASE_URL = 'https://sonarcloud.io/api/measures/component_tree?component=fga-eps-mds_'
+BASE_URL = 'https://sonarcloud.io/api/measures/component_tree?component=WeillerFernandes_'
 
 if __name__ == '__main__':
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     response = requests.get(f'{BASE_URL}{REPO}&metricKeys={",".join(METRICS_SONAR)}&ps=500')
     j = json.loads(response.text)
 
-    file_path = f'./analytics-raw-data/fga-eps-mds-{REPO}-{TODAY.strftime("%m-%d-%Y-%H-%M-%S")}-{RELEASE_VERSION}.json'
+    file_path = f'./analytics-raw-data/WeillerFernandes-{REPO}-{TODAY.strftime("%m-%d-%Y-%H-%M-%S")}-{RELEASE_VERSION}.json'
 
     with open(file_path, 'w') as fp:
         fp.write(json.dumps(j))
