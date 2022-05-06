@@ -36,17 +36,6 @@ jobs:
         run: |
           sed -i 's/\/home\/runner\/work\/2021.2-SysArq-Archives\/2021.2-SysArq-Archives\//\/github\/workspace\//g' coverage.xml
 
-      - name: Criar arquivo .env
-        run: |
-          touch .env
-          echo SECRET_KEY=secret_key >> .env
-          echo DEBUG=True >> .env
-          echo POSTGRES_HOST=db_archives >> .env
-          echo POSTGRES_DB=postgres >> .env
-          echo POSTGRES_USER=postgres >> .env
-          echo POSTGRES_PASSWORD=password >> .env
-          cat .env
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
