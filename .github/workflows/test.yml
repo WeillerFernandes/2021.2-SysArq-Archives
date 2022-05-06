@@ -49,8 +49,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: "Upload coverage to Codecov"
-        uses: codecov/codecov-action@v1
+      
+      - name: Upload coverage to Codecov
+        if: always()
+        uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./
+          env_vars: OS,PYTHON
           fail_ci_if_error: true
+          files: ./coverage.xml
+          flags: unittests
+          name: 2021.2-SysArq-Archives
+          verbose: true
