@@ -26,11 +26,14 @@ jobs:
         with:
           python-version: 3.7
           cache: pip
-      - name: Install tox and any other packages
-        run: pip install tox
-      - name: Run tox
-        run: tox -- --cov=archives_app --cov-report=xml --junitxml=junittest.xml
+     # - name: Install tox and any other packages
+     #   run: pip install tox
+     # - name: Run tox
+     #   run: tox -- --cov=archives_app --cov-report=xml --junitxml=junittest.xml
 
+      - name: Executar pytest  
+        run: sudo docker-compose run web_archives pytest --cov --cov-report xml:./coverage.xml
+        
       - name: fix code coverage paths
         if: always()
         run: |
